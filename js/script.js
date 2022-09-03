@@ -132,11 +132,11 @@ const showNews = (data) => {
                 <img src="icons/star.svg" alt="" />
                 <img src="icons/star.svg" alt="" />
               </div>
-              <div onclick="loadNewsDetails('${
+              <label for="my-modal" onclick="loadNewsDetails('${
                 news._id
-              }')" class="cursor-pointer hover:bg-[#EEEFFF] rounded-full p-1">
+              }')" class="cursor-pointer modal-button hover:bg-[#EEEFFF] rounded-full p-1 animate-wiggle">
                 <img src="icons/arrow.svg" alt="" />
-              </div>
+              </label>
             </div>
           </div>
         </div>

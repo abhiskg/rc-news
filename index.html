@@ -19,6 +19,15 @@
             colors: {
               primary: "#5D5FEF",
             },
+            keyframes: {
+              wiggle: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(5px)" },
+              },
+            },
+            animation: {
+              wiggle: "wiggle 1s ease-in-out infinite",
+            },
           },
         },
       };
@@ -185,9 +194,9 @@
                 <img src="icons/star.svg" alt="" />
                 <img src="icons/star.svg" alt="" />
               </div>
-              <div for="my-modal" class="cursor-pointer">
+              <label for="my-modal" class="cursor-pointer modal-button">
                 <img src="icons/arrow.svg" alt="" />
-              </div>
+              </label>
             </div>
           </div>
         </div>
@@ -200,6 +209,47 @@
         Copywrite 2022 @RT News
       </p>
     </footer>
+
+    <!-- Modal Section -->
+    <input type="checkbox" id="my-modal" class="modal-toggle" />
+    <div class="modal">
+      <div
+        class="card xl:w-7/12 md:w-9/12 w-11/12 bg-base-100 shadow-xl image-full"
+      >
+        <figure>
+          <img
+            class="w-full"
+            src="https://i.ibb.co/M23fhxm/unsplash-Eh-Tc-C9s-YXsw.png"
+            alt="Shoes"
+          />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">
+            Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S. Military
+            Aid Package Yet
+          </h2>
+          <div class="font-medium">Author Name: <span>Jane Chan</span></div>
+          <div class="font-medium">Total View: <span>444</span></div>
+          <p class="text-gray-300 hidden md:block">
+            If a dog chews shoes whose shoes does he choose?
+          </p>
+
+          <div class="modal-action">
+            <label for="my-modal" class="btn btn-error">Close</label>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-box">
+        <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
+        <p class="py-4">
+          You've been selected for a chance to get one year of subscription to
+          use Wikipedia for free!
+        </p>
+        <div class="modal-action">
+          <label for="my-modal" class="btn">Yay!</label>
+        </div>
+      </div> -->
+    </div>
 
     <!-- Js Link -->
     <script src="js/script.js"></script>
