@@ -34,7 +34,6 @@ const showCategory = (categories) => {
 };
 
 // Loading Section
-
 const toggleSpinner = (isLoading) => {
   const loaderSection = document.querySelector("#loader-section");
 
@@ -58,7 +57,6 @@ const loadNews = async (category) => {
     const { data } = await res.json();
 
     showNews(data);
-
     totalNewsInCategory(data.length, category_name);
   } catch (error) {
     console.log(error);
@@ -96,7 +94,7 @@ const showNews = (data) => {
   data.forEach((news) => {
     const divElement = document.createElement("div");
     divElement.innerHTML = `
-    <div class="card md:card-side bg-base-100 shadow-xl mt-10">
+    <div class="card md:card-side bg-base-100 shadow-xl mt-10 ">
           <figure>
             <img
               class="h-72 w-full md:w-auto"
@@ -108,9 +106,9 @@ const showNews = (data) => {
             <h2 class="card-title">${news.title}</h2>
             <p class="text-gray-400">
               ${
-                news.details.length < 300
+                news.details.length < 280
                   ? news.details
-                  : news.details.slice(0, 290) + "..."
+                  : news.details.slice(0, 275) + "..."
               }
             </p>
             <div class="flex items-center justify-between">
@@ -192,7 +190,7 @@ const showNewsDetails = (news) => {
   modalContainer.textContent = "";
   modalContainer.innerHTML = `
   <div
-        class="card xl:w-7/12 md:w-9/12 w-11/12 bg-base-100 shadow-xl image-full"
+        class="card xl:w-6/12 lg:w-7/12 md:w-8/12 w-10/12 bg-base-100 shadow-xl image-full"
       >
         <figure>
           <img
@@ -226,7 +224,7 @@ const showNewsDetails = (news) => {
                 : "No View"
             }</span>
           </div>
-          <p class="text-gray-300 hidden md:block">
+          <p class="text-gray-300 hidden sm:block">
           ${
             news.details.length < 350
               ? news.details

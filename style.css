@@ -3,5 +3,5 @@ body {
 }
 header,
 main {
-  width: min(1300px, 92%);
+  width: min(1250px, 92%);
 }
