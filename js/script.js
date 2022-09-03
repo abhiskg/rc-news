@@ -165,5 +165,56 @@ const loadNewsDetails = async (news_id) => {
 };
 
 const showNewsDetails = (news) => {
-  console.log(news);
+  const modalContainer = document.querySelector("#modal-container");
+  modalContainer.textContent = "";
+  modalContainer.innerHTML = `
+  <div
+        class="card xl:w-7/12 md:w-9/12 w-11/12 bg-base-100 shadow-xl image-full"
+      >
+        <figure>
+          <img
+            class="w-full"
+            src="${news.image_url}"
+            alt="Shoes"
+          />
+        </figure>
+        <div class="card-body">
+          <h2 class="font-semibold text-base md:text-xl">
+          ${news.title}
+          </h2>
+          <div class="font-medium md:text-base text-sm">
+            Author Name: <span>${
+              news.author.name && news.author.name !== null
+                ? news.author.name
+                : "No Name Available"
+            }</span>
+          </div>
+          <div class="font-medium md:text-base text-sm">
+            Publish Date: <span>${
+              news.author.published_date && news.author.published_date !== null
+                ? news.author.published_date.split(" ")[0]
+                : "No Date Available"
+            }</span>
+          </div>
+          <div class="font-medium md:text-base text-sm">
+            Total View: <span>${
+              news.total_view && news.total_view !== null
+                ? news.total_view
+                : "No View"
+            }</span>
+          </div>
+          <p class="text-gray-300 hidden md:block">
+          ${
+            news.details.length < 350
+              ? news.details
+              : news.details.slice(0, 320) + "..."
+          }
+          </p>
+
+          <div class="modal-action">
+            <label for="my-modal" class="btn btn-error">Close</label>
+          </div>
+        </div>
+      </div>
+  `;
 };
