@@ -33,8 +33,14 @@ const loadNews = async (category_id = "01") => {
       `https://openapi.programming-hero.com/api/news/category/${category_id}`
     );
     const { data } = await res.json();
+
     showNews(data);
-    totalNewsInCategory(data.length, data[0].category_id);
+
+    if (data.length > 0) {
+      totalNewsInCategory(data.length, data[0].category_id);
+    } else {
+      totalNewsInCategory();
+    }
   } catch (error) {
     console.log(error);
   }
@@ -44,6 +50,11 @@ loadNews();
 const showNews = (data) => {
   const newsContainer = document.querySelector("#news-container");
   newsContainer.textContent = "";
+
+  if (data.length < 1) {
+    newsContainer.innerText = "No News Found";
+    return;
+  }
 
   let publishDate;
   data.forEach((news) => {
@@ -116,28 +127,32 @@ const showNews = (data) => {
 };
 
 // Total News in each category
-const totalNewsInCategory = (length, id) => {
+const totalNewsInCategory = (length = 0, id = "00") => {
   const totalNews = document.querySelector("#total-news");
   const newsCategory = document.querySelector("#news-category");
-
+  if (length === 0) {
+    totalNews.innerText = 0;
+    newsCategory.innerText = "";
+    return;
+  }
   totalNews.innerText = length.toString();
 
   if (id === "01") {
-    newsCategory.innerText = "Breaking News";
+    newsCategory.innerText = "for Breaking News";
   } else if (id === "02") {
-    newsCategory.innerText = "Regular News";
+    newsCategory.innerText = "for Regular News";
   } else if (id === "03") {
-    newsCategory.innerText = "International News";
+    newsCategory.innerText = " for International News";
   } else if (id === "04") {
-    newsCategory.innerText = "Sports";
+    newsCategory.innerText = "for Sports";
   } else if (id === "05") {
-    newsCategory.innerText = "Entertainment";
+    newsCategory.innerText = "for Entertainment";
   } else if (id === "06") {
-    newsCategory.innerText = "Culture";
+    newsCategory.innerText = "for Culture";
   } else if (id === "07") {
-    newsCategory.innerText = "Arts";
+    newsCategory.innerText = "for Arts";
   } else {
-    newsCategory.innerText = "All News";
+    newsCategory.innerText = "for All News";
   }
   console.log(length, id);
 };
