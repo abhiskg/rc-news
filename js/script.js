@@ -27,25 +27,30 @@ const showCategory = (categories) => {
 };
 
 // Category wise News handler section
-const loadNews = async (category_id) => {
+const loadNews = async (category_id = "01") => {
   try {
     const res = await fetch(
       `https://openapi.programming-hero.com/api/news/category/${category_id}`
     );
     const { data } = await res.json();
     showNews(data);
+    totalNewsInCategory(data.length, data[0].category_id);
   } catch (error) {
     console.log(error);
   }
 };
+loadNews();
 
 const showNews = (data) => {
   const newsContainer = document.querySelector("#news-container");
   newsContainer.textContent = "";
 
+  let publishDate;
   data.forEach((news) => {
-    const publishDateTime = news.author.published_date;
-    const publishDate = publishDateTime.split(" ");
+    if (news.author.published_date !== null) {
+      const publishDateTime = news.author.published_date;
+      publishDate = publishDateTime.split(" ");
+    }
 
     const divElement = document.createElement("div");
     divElement.innerHTML = `
@@ -77,7 +82,11 @@ const showNews = (data) => {
                   <div class="font-medium">${
                     news.author.name ? news.author.name : "No Name"
                   }</div>
-                  <div class="text-sm text-gray-500">${publishDate[0]}</div>
+                  <div class="text-sm text-gray-500">${
+                    news.author.published_date !== null
+                      ? publishDate[0]
+                      : "No Date"
+                  }</div>
                 </div>
               </div>
 
@@ -103,7 +112,32 @@ const showNews = (data) => {
         </div>
     `;
     newsContainer.append(divElement);
-    console.log(news);
-    console.log(news.author.name);
   });
+};
+
+// Total News in each category
+const totalNewsInCategory = (length, id) => {
+  const totalNews = document.querySelector("#total-news");
+  const newsCategory = document.querySelector("#news-category");
+
+  totalNews.innerText = length.toString();
+
+  if (id === "01") {
+    newsCategory.innerText = "Breaking News";
+  } else if (id === "02") {
+    newsCategory.innerText = "Regular News";
+  } else if (id === "03") {
+    newsCategory.innerText = "International News";
+  } else if (id === "04") {
+    newsCategory.innerText = "Sports";
+  } else if (id === "05") {
+    newsCategory.innerText = "Entertainment";
+  } else if (id === "06") {
+    newsCategory.innerText = "Culture";
+  } else if (id === "07") {
+    newsCategory.innerText = "Arts";
+  } else {
+    newsCategory.innerText = "All News";
+  }
+  console.log(length, id);
 };
