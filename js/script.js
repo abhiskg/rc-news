@@ -33,8 +33,21 @@ const showCategory = (categories) => {
   });
 };
 
+// Loading Section
+
+const toggleSpinner = (isLoading) => {
+  const loaderSection = document.querySelector("#loader-section");
+
+  if (isLoading) {
+    loaderSection.classList.remove("hidden");
+  } else {
+    loaderSection.classList.add("hidden");
+  }
+};
+
 // Category wise News handler section
 const loadNews = async (category) => {
+  toggleSpinner(true);
   const category_id = category[0];
   const category_name = category[1];
 
@@ -49,6 +62,7 @@ const loadNews = async (category) => {
     totalNewsInCategory(data.length, category_name);
   } catch (error) {
     console.log(error);
+    toggleSpinner(false);
   }
 };
 loadNews(["01", "Breaking News"]);
@@ -71,8 +85,10 @@ const showNews = (data) => {
     divElement.innerText = "No News Found";
     divElement.classList.add(...divClasses);
     newsContainer.append(divElement);
+    toggleSpinner(false);
     return;
   }
+  toggleSpinner(false);
 
   data.forEach((news) => {
     const divElement = document.createElement("div");
@@ -157,11 +173,15 @@ const totalNewsInCategory = (length = 0, category_name) => {
 
 // News Details in Modal Handler
 const loadNewsDetails = async (news_id) => {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/news/${news_id}`
-  );
-  const { data } = await res.json();
-  showNewsDetails(data[0]);
+  try {
+    const res = await fetch(
+      `https://openapi.programming-hero.com/api/news/${news_id}`
+    );
+    const { data } = await res.json();
+    showNewsDetails(data[0]);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const showNewsDetails = (news) => {
