@@ -1,3 +1,4 @@
-header {
+header,
+main {
   width: min(1400px, 94%);
 }
