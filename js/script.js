@@ -71,6 +71,9 @@ const showNews = (data) => {
   const newsContainer = document.querySelector("#news-container");
   newsContainer.textContent = "";
 
+  // Sorting
+  data = data.sort((a, b) => b.total_view - a.total_view);
+
   if (data.length < 1) {
     const divElement = document.createElement("div");
     const divClasses = [
