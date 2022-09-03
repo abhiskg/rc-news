@@ -25,10 +25,10 @@
     </script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <header>
+  <body class="bg-gray-100">
+    <header class="mx-auto">
       <!-- Navbar -->
-      <nav class="navbar bg-base-100">
+      <nav class="navbar">
         <div class="navbar-start">
           <div class="dropdown">
             <label tabindex="0" class="btn btn-ghost sm:hidden">
@@ -55,7 +55,7 @@
               <li><a>Blog</a></li>
             </ul>
           </div>
-          <a class="btn btn-ghost normal-case text-xl">RC News</a>
+          <a class="normal-case text-xl">RC News</a>
         </div>
 
         <div class="navbar-end">
@@ -86,9 +86,15 @@
         </div>
       </nav>
 
-      <hr />
+      <hr class="w-[95%] mx-auto" />
 
-      <!--  -->
+      <!-- Category Navigation -->
+      <nav>
+        <ul
+          class="flex items-center justify-between my-5"
+          id="category-container"
+        ></ul>
+      </nav>
     </header>
     <!-- Js Link -->
     <script src="js/script.js"></script>

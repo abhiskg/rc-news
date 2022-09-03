@@ -5,9 +5,19 @@ const loadCategory = async () => {
       "https://openapi.programming-hero.com/api/news/categories"
     );
     const { data } = await res.json();
-    console.log(data.news_category);
+    showCategory(data.news_category);
   } catch (error) {
     console.log(error);
   }
 };
 loadCategory();
+
+const showCategory = (categories) => {
+  const categoryContainer = document.querySelector("#category-container");
+
+  categories.forEach((category) => {
+    const liElement = document.createElement("li");
+    liElement.innerText = category.category_name;
+    categoryContainer.append(liElement);
+  });
+};
