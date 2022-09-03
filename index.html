@@ -17,7 +17,7 @@
         theme: {
           extend: {
             colors: {
-              clifford: "#da373d",
+              primary: "#5D5FEF",
             },
           },
         },
@@ -103,6 +103,31 @@
         <p class="px-4 py-2 bg-white rounded">
           4 items Found in Category Entertainment
         </p>
+      </section>
+
+      <!-- Sorting Section -->
+      <section class="flex justify-between items-center mt-5">
+        <div class="flex items-center gap-3">
+          <div class="font-medium">Sort by view:</div>
+          <div>
+            <select class="px-2 py-1 rounded-sm">
+              <option disabled selected>Default</option>
+              <option>Homer</option>
+              <option>Marge</option>
+              <option>Bart</option>
+              <option>Lisa</option>
+              <option>Maggie</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <button class="text-white bg-primary rounded px-3 py-2">
+            Today's Pick
+          </button>
+          <button class="text-primary border border-primary px-3 py-2 rounded">
+            Trending
+          </button>
+        </div>
       </section>
     </main>
     <!-- Js Link -->
