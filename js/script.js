@@ -74,13 +74,7 @@ const showNews = (data) => {
     return;
   }
 
-  let publishDate;
   data.forEach((news) => {
-    if (news.author.published_date !== null) {
-      const publishDateTime = news.author.published_date;
-      publishDate = publishDateTime.split(" ");
-    }
-
     const divElement = document.createElement("div");
     divElement.innerHTML = `
     <div class="card md:card-side bg-base-100 shadow-xl mt-10">
@@ -109,12 +103,15 @@ const showNews = (data) => {
                 </div>
                 <div>
                   <div class="font-medium">${
-                    news.author.name ? news.author.name : "No Name"
+                    news.author.name && news.author.name !== null
+                      ? news.author.name
+                      : "No Name Available"
                   }</div>
                   <div class="text-sm text-gray-500">${
+                    news.author.published_date &&
                     news.author.published_date !== null
-                      ? publishDate[0]
-                      : "No Date"
+                      ? news.author.published_date.split(" ")[0]
+                      : "No Date Available"
                   }</div>
                 </div>
               </div>
@@ -122,7 +119,9 @@ const showNews = (data) => {
               <div class="flex items-center gap-2">
                 <img src="icons/eye.svg" alt="" />
                 <span class="font-medium">${
-                  news.total_view ? news.total_view : "No View"
+                  news.total_view && news.total_view !== null
+                    ? news.total_view
+                    : "No View"
                 }</span>
               </div>
 
@@ -133,13 +132,16 @@ const showNews = (data) => {
                 <img src="icons/star.svg" alt="" />
                 <img src="icons/star.svg" alt="" />
               </div>
-              <div class:"cursor-pointer">
+              <div onclick="loadNewsDetails('${
+                news._id
+              }')" class="cursor-pointer hover:bg-[#EEEFFF] rounded-full p-1">
                 <img src="icons/arrow.svg" alt="" />
               </div>
             </div>
           </div>
         </div>
     `;
+
     newsContainer.append(divElement);
   });
 };
@@ -151,4 +153,17 @@ const totalNewsInCategory = (length = 0, category_name) => {
 
   totalNews.innerText = length.toString();
   newsCategory.innerText = category_name;
+};
+
+// News Details in Modal Handler
+const loadNewsDetails = async (news_id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/news/${news_id}`
+  );
+  const { data } = await res.json();
+  showNewsDetails(data[0]);
+};
+
+const showNewsDetails = (news) => {
+  console.log(news);
 };
