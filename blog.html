@@ -5,8 +5,184 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RC News</title>
+    <!-- Daisy UI & Tailwind Link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#5D5FEF",
+            },
+            keyframes: {
+              wiggle: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(5px)" },
+              },
+            },
+            animation: {
+              wiggle: "wiggle 1s ease-in-out infinite",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1>Blog</h1>
+  <body class="bg-gray-100">
+    <header class="mx-auto">
+      <!-- Navbar -->
+      <nav class="navbar px-0">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <label tabindex="0" class="btn btn-ghost sm:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabindex="0"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li class="cursor-pointer"><a href="index.html">News</a></li>
+              <li class="cursor-pointer"><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <a class="font-semibold text-primary text-xl">RC News</a>
+        </div>
+
+        <div class="navbar-end">
+          <ul class="sm:flex gap-4 hidden mr-4 font-medium">
+            <li class="cursor-pointer">
+              <a href="index.html">News</a>
+            </li>
+            <li class="cursor-pointer"><a href="blog.html">Blog</a></li>
+          </ul>
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+              <div class="w-10 rounded-full">
+                <img src="https://placeimg.com/80/80/people" />
+              </div>
+            </label>
+            <ul
+              tabindex="0"
+              class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a class="justify-between">
+                  Profile
+                  <span class="badge">New</span>
+                </a>
+              </li>
+              <li><a>Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <hr />
+    </header>
+
+    <main class="mx-auto mt-10">
+      <!-- Qsn 01 -->
+      <div class="card md:w-10/12 w-full bg-base-100 shadow-xl mx-auto">
+        <div class="card-body">
+          <h2 class="card-title">
+            01. What is the difference between var, let, and const?
+          </h2>
+          <p>
+            <strong>var</strong> declarations are globally scoped or
+            function/locally scoped. var variables can be re-declared and
+            re-assign. We can declare var variables after defining them.
+          </p>
+          <p>
+            <strong>let</strong> is block scoped. Let can't be re-declared but
+            can be re-assign.
+          </p>
+          <p>
+            <strong>const</strong> is block scoped. Can't be re-declared and
+            re-assign. But can update properties of object and array.
+          </p>
+          <p>
+            While var and let can be declared without being initialized, const
+            must be initialized during declaration.
+          </p>
+        </div>
+      </div>
+
+      <!-- Qsn-02 -->
+      <div class="card md:w-10/12 w-full bg-base-100 shadow-xl mx-auto mt-5">
+        <div class="card-body">
+          <h2 class="card-title">
+            02. What is the difference between regular function and arrow
+            function?
+          </h2>
+          <p>
+            Regular function can have duplicate named parameter but Arrow
+            functions can never have duplicate named parameters.
+          </p>
+          <p>
+            Unlike regular functions, arrow functions do not have their own
+            <strong>this</strong>. In arrow function
+            <strong>this</strong> keyword is always bound to the closest
+            non-arrow parent function.
+          </p>
+          <p>
+            Regular function has hoisting effect that means regular function can
+            be called before declaring but in arrow function that is not
+            possible.
+          </p>
+        </div>
+      </div>
+
+      <!-- Qsn-03 -->
+      <div class="card md:w-10/12 w-full bg-base-100 shadow-xl mx-auto mt-5">
+        <div class="card-body">
+          <h2 class="card-title">03. Why should you use template string?</h2>
+          <p>
+            Template string lets us insert/interpolate variables and expressions
+            into strings without needing to concatenate.
+          </p>
+          <p>
+            Another great feature of template strings is that we can have
+            strings with multiple lines for better code readability. This cannot
+            be done in an easy way with the old style of strings.
+          </p>
+          <p>
+            Template strings allow us to nest regular strings or template
+            strings within template strings.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="mt-10">
+      <p class="text-center font-medium bg-white py-3 text-sm text-gray-600">
+        Copywrite 2022 @RT News
+      </p>
+    </footer>
   </body>
 </html>
