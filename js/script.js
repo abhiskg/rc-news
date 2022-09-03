@@ -20,14 +20,24 @@ const showCategory = (categories) => {
     const liElement = document.createElement("li");
 
     liElement.innerText = category.category_name;
-    liElement.setAttribute("onclick", `loadNews('${category.category_id}')`);
-    liElement.classList.add("cursor-pointer", "hover:text-primary");
+    liElement.setAttribute(
+      "onclick",
+      `loadNews(['${category.category_id}','${category.category_name}'])`
+    );
+    liElement.classList.add(
+      "cursor-pointer",
+      "hover:text-primary",
+      "font-medium"
+    );
     categoryContainer.append(liElement);
   });
 };
 
 // Category wise News handler section
-const loadNews = async (category_id = "01") => {
+const loadNews = async (category) => {
+  const category_id = category[0];
+  const category_name = category[1];
+
   try {
     const res = await fetch(
       `https://openapi.programming-hero.com/api/news/category/${category_id}`
@@ -36,23 +46,31 @@ const loadNews = async (category_id = "01") => {
 
     showNews(data);
 
-    if (data.length > 0) {
-      totalNewsInCategory(data.length, data[0].category_id);
-    } else {
-      totalNewsInCategory();
-    }
+    totalNewsInCategory(data.length, category_name);
   } catch (error) {
     console.log(error);
   }
 };
-loadNews();
+loadNews(["01", "Breaking News"]);
 
 const showNews = (data) => {
   const newsContainer = document.querySelector("#news-container");
   newsContainer.textContent = "";
 
   if (data.length < 1) {
-    newsContainer.innerText = "No News Found";
+    const divElement = document.createElement("div");
+    const divClasses = [
+      "flex",
+      "justify-center",
+      "items-center",
+      "h-[30rem]",
+      "text-xl",
+      "font-semibold",
+      "text-red-500",
+    ];
+    divElement.innerText = "No News Found";
+    divElement.classList.add(...divClasses);
+    newsContainer.append(divElement);
     return;
   }
 
@@ -127,32 +145,10 @@ const showNews = (data) => {
 };
 
 // Total News in each category
-const totalNewsInCategory = (length = 0, id = "00") => {
+const totalNewsInCategory = (length = 0, category_name) => {
   const totalNews = document.querySelector("#total-news");
   const newsCategory = document.querySelector("#news-category");
-  if (length === 0) {
-    totalNews.innerText = 0;
-    newsCategory.innerText = "";
-    return;
-  }
-  totalNews.innerText = length.toString();
 
-  if (id === "01") {
-    newsCategory.innerText = "for Breaking News";
-  } else if (id === "02") {
-    newsCategory.innerText = "for Regular News";
-  } else if (id === "03") {
-    newsCategory.innerText = " for International News";
-  } else if (id === "04") {
-    newsCategory.innerText = "for Sports";
-  } else if (id === "05") {
-    newsCategory.innerText = "for Entertainment";
-  } else if (id === "06") {
-    newsCategory.innerText = "for Culture";
-  } else if (id === "07") {
-    newsCategory.innerText = "for Arts";
-  } else {
-    newsCategory.innerText = "for All News";
-  }
-  console.log(length, id);
+  totalNews.innerText = length.toString();
+  newsCategory.innerText = category_name;
 };
